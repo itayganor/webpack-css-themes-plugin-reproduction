@@ -15,10 +15,9 @@ const config = (env, options) => {
 
     return {
         mode: isDevMode ? 'development' : 'production',
-        entry: [
-            'react-hot-loader/patch',
-            './src/index.tsx',
-        ],
+        entry: {
+            main: ['react-hot-loader/patch', './src/index.tsx']
+        },
         output: {
             path: path.resolve(__dirname, 'dist'),
             filename: 'bundle.js',
