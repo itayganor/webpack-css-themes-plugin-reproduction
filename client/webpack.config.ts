@@ -1,15 +1,20 @@
 const webpack = require('webpack');
 const path = require('path');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-// const TerserJSPlugin = require('terser-webpack-plugin');
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-//const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const WebpackCSSThemesPlugin = require('webpack-css-themes-plugin');
-const ExcludeAssetsPlugin = require('@ianwalter/exclude-assets-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+import SwappableThemesPlugin from 'swappable-themes/dist/SwappableThemesPlugin';
+import {Themes} from './src/Damn';
 
-const config = (env, options) => {
+const themes = {
+    [Themes.Dark]: path.resolve(__dirname, './src/theme/themes/demo-dark.less'),
+    [Themes.Light]: path.resolve(__dirname, './src/theme/themes/demo-light.less'),
+};
+
+
+const config = async (env, options) => {
     const envMode = options.mode;
     const isDevMode = envMode === 'development';
 
@@ -43,12 +48,6 @@ const config = (env, options) => {
                     test: /\.less$/,
                     exclude: /\.module\.less$/,
                     use: [
-                        // {
-                        //     loader: MiniCssExtractPlugin.loader,
-                        //     options: {
-                        //         hmr: isDevMode,
-                        //     },
-                        // },
                         'css-loader',
                         {
                             loader: 'less-loader',
@@ -63,12 +62,6 @@ const config = (env, options) => {
                 {
                     test: /\.module\.less$/,
                     use: [
-                        // {
-                        //     loader: MiniCssExtractPlugin.loader,
-                        //     options: {
-                        //         hmr: isDevMode,
-                        //     },
-                        // },
                         {
                             loader: 'css-loader',
                             options: {
@@ -141,24 +134,13 @@ const config = (env, options) => {
         },
         plugins: [
             new LodashModuleReplacementPlugin,
-            new WebpackCSSThemesPlugin({
-                themes: [
-                    {
-                        name: 'main',
-                        entryPath: path.resolve(__dirname, './src/theme/themes/demo-dark.less'),
-                    },
-                    {
-                        name: 'light',
-                        entryPath: path.resolve(__dirname, 'src/theme/themes/demo-light.less'),
-                    },
-                ],
+            new SwappableThemesPlugin({
+                themes,
+                defaultTheme: Themes.Dark
             }),
-            // exclude css inject
             new HtmlWebpackPlugin({
-                excludeAssets: [/\.css$/],
                 template: path.resolve(__dirname, './index.html'),
             }),
-            new ExcludeAssetsPlugin(),
         ],
         devtool: isDevMode ? 'source-map' : false,
         stats: {
