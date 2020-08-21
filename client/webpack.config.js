@@ -144,7 +144,7 @@ const config = (env, options) => {
             new WebpackCSSThemesPlugin({
                 themes: [
                     {
-                        name: 'main',
+                        name: 'dark',
                         entryPath: path.resolve(__dirname, './src/theme/themes/demo-dark.less'),
                     },
                     {

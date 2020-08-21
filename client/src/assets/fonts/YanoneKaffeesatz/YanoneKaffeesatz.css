@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'Yanone Kaffeesatz';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 200;
+    src: url('./files/YanoneKaffeesatz-ExtraLight.ttf');
+}
+
+@font-face {
+    font-family: 'Yanone Kaffeesatz';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 300;
+    src: url('./files/YanoneKaffeesatz-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Yanone Kaffeesatz';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url('./files/YanoneKaffeesatz-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Yanone Kaffeesatz';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 500;
+    src: url('./files/YanoneKaffeesatz-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'Yanone Kaffeesatz';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 600;
+    src: url('./files/YanoneKaffeesatz-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: 'Yanone Kaffeesatz';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 700;
+    src: url('./files/YanoneKaffeesatz-Bold.ttf');
+}
