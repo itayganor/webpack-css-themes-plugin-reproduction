@@ -54,7 +54,10 @@ const config = (env, options) => {
                             loader: 'less-loader',
                             options: {
                                 lessOptions: {
-                                    javascriptEnabled: true
+                                    javascriptEnabled: true,
+                                    modifyVars: {
+                                        hack: `true; @import '${path.join(__dirname, './src/theme/antdOverrides.less')}'`,
+                                    },
                                 },
                             },
                         },

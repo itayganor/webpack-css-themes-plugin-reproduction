@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ianwalter/exclude-assets-plugin": "^1.0.0",
+    "antd": "^4.6.0",
     "html-webpack-plugin": "^4.3.0",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
