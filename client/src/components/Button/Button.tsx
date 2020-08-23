@@ -1,15 +1,15 @@
-import React, {ReactNode} from 'react';
+import React, {HTMLAttributes, ReactNode} from 'react';
 
 import classes from './Button.module.less';
 
 
-function Button({children}: ButtonProps) {
-    return <button className={classes.btn}>
+function Button({children, ...rest}: ButtonProps) {
+    return <button className={classes.btn} {...rest}>
         {children}
     </button>;
 }
 
-interface ButtonProps {
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     children: ReactNode;
 }
 

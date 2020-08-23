@@ -5,7 +5,7 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-import SwappableThemesPlugin from 'swappable-themes/dist/SwappableThemesPlugin';
+import MultipleThemesPlugin from 'multiple-themes-webpack-plugin/dist/MultipleThemesPlugin';
 import {Themes} from './src/Damn';
 
 const themes = {
@@ -53,7 +53,10 @@ const config = async (env, options) => {
                             loader: 'less-loader',
                             options: {
                                 lessOptions: {
-                                    javascriptEnabled: true
+                                    javascriptEnabled: true,
+                                    modifyVars: {
+                                        hack: `true; @import '${path.join(__dirname, './src/theme/antdOverrides.less')}'`,
+                                    },
                                 },
                             },
                         },
@@ -71,14 +74,6 @@ const config = async (env, options) => {
                             },
                         },
                         'less-loader',
-                    ],
-                },
-                {
-                    test: /\.css$/,
-                    exclude: /\.module\.css$/,
-                    use: [
-                        'style-loader',
-                        'css-loader',
                     ],
                 },
                 {
@@ -134,7 +129,7 @@ const config = async (env, options) => {
         },
         plugins: [
             new LodashModuleReplacementPlugin,
-            new SwappableThemesPlugin({
+            new MultipleThemesPlugin({
                 themes,
                 defaultTheme: Themes.Dark
             }),
